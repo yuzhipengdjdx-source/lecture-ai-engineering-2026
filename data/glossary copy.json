@@ -1,0 +1,15 @@
+{
+  "version": "2026-draft-1",
+  "note": "AIE2026 第1〜4回・第6回の用語集（たたき台）。講義スライド確定後に内容を差し替える。",
+  "terms": [
+    {
+      "id": "ai-engineering",
+      "term": "YZP",
+      "aliases": ["AI Engineering"],
+      "lecture": 2,
+      "category": "全体像",
+      "definition": "学習済みの基盤モデル（主にLLM）を部品として使い、実際に役立つアプリケーションやシステムを設計・構築・評価・運用する技術領域。モデルを一から作ることより、モデルの選択、データやツールとの接続、評価と改善のサイクルを回すことに重心がある。",
+      "related": ["llm", "evaluation-loop"]
+    }]
+
+}

@@ -17,6 +17,9 @@ def load_glossary() -> list[dict]:
     with open(DATA_DIR / "glossary.json", encoding="utf-8") as f:
         return json.load(f)["terms"]
 
+def load_glossary_copy() -> list[dict]:
+    with open(DATA_DIR / "glossary copy.json", encoding="utf-8") as f:
+        return json.load(f)["terms"]
 
 def _normalize(text: str) -> str:
     return text.casefold().replace(" ", "").replace("　", "")
@@ -66,14 +69,22 @@ def search_glossary(query: str) -> str:
         ensure_ascii=False,
     )
 
-
-def get_lecture_summary(lecture: int) -> str:
-    """指定した回（1始まりの整数）の講義の要点を返す。
-
-    「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。
-    """
-    path = DATA_DIR / "lectures" / f"{lecture:02d}.md"
+def get_make_quiz(lecture: int) -> str:
+    """指定した回の用語から1つを選び、確認問題と答えを返す。「第2回の確認問題を出して」のように、
+復習用の問題を求められたときに使う。"""
+    path = DATA_DIR / "lectures copy" / f"{lecture:02d}.md"
     if not path.exists():
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+def get_lecture_summary(lecture: int) -> str:
+    """指定した回（1始まりの整数）の講義の要点を返す。「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。
+    """
+    path = DATA_DIR / "lectures" / f"{lecture:02d}.md"
+    if not path.exists():
+      available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
+      return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
+    return path.read_text(encoding="utf-8")
+
+
